@@ -1,8 +1,15 @@
+import { useDispatch } from "react-redux";
+import { getGoogleLogInAction } from "../../Actions/auth";
+
 export const Google = () => {
+  const dispatch = useDispatch();
+  const handleGoogleSingIn = () => {
+    dispatch(getGoogleLogInAction());
+  };
   return (
     <div className="auth__social_networks">
       <p>Login with Social Networks</p>
-      <div className="google-btn">
+      <div className="google-btn" onClick={handleGoogleSingIn}>
         <div className="google-icon-wrapper">
           <img
             className="google-icon"
