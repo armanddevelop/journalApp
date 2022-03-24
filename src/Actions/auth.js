@@ -10,6 +10,17 @@ export const logInAction = (uid, displayName) => ({
   },
 });
 
+export const logOutAction = () => ({
+  type: types.logout,
+});
+
+export const startLogOut = () => {
+  return async (dispatch) => {
+    await firebase.auth().signOut();
+    dispatch(logOutAction());
+  };
+};
+
 export const getGoogleLogInAction = () => {
   return (dispatch) => {
     firebase
@@ -39,6 +50,7 @@ export const getLoginUserAction = (email, password) => {
       });
   };
 };
+
 export const registerUserAction = (name, email, password) => {
   return (dispatch) => {
     dispatch(startLoading());

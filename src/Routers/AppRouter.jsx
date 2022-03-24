@@ -10,6 +10,9 @@ import { JornalScreen } from "../Components";
 import { AuthRouter } from "./AuthRouter";
 import { firebase } from "../FireBase/fireBaseConfig";
 import { logInAction } from "../Actions/auth";
+import { Loading } from "../Components/Loading";
+import { PublicRoutes } from "./PublicRoutes";
+import { PrivateRoutes } from "./PrivateRoutes";
 
 export const AppRouter = () => {
   const dispatch = useDispatch();
@@ -27,14 +30,29 @@ export const AppRouter = () => {
     });
   }, [dispatch, setChecking, setIsLogIn]);
   if (checking) {
-    return <h1>Espere ...</h1>;
+    return <Loading />;
   }
   return (
     <Router>
       <div>
         <Switch>
-          <Route path="/auth" component={AuthRouter} />
-          <Route exact path="/" component={JornalScreen} />
+          <Route
+            path="/auth"
+            children={
+              <PublicRoutes isLogIn={isLogIn}>
+                <AuthRouter />
+              </PublicRoutes>
+            }
+          />
+          <Route
+            exact
+            path="/"
+            children={
+              <PrivateRoutes isLogIn={isLogIn}>
+                <JornalScreen />
+              </PrivateRoutes>
+            }
+          />
           <Redirect to="/auth/login" />
         </Switch>
       </div>
