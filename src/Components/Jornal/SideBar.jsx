@@ -5,12 +5,14 @@ import { JornalEntries } from "./JornalEntries";
 
 export const SideBar = () => {
   const dispatch = useDispatch();
+
   const { name } = useSelector((state) => state.auth);
+
   const handleLogOut = () => {
     dispatch(startLogOut());
   };
+
   const handleNewEntry = () => {
-    console.log("licha");
     dispatch(startNewNoteAction());
   };
   return (

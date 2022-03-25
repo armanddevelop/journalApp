@@ -18,7 +18,6 @@ export const startNewNoteAction = () => {
       date: new Date().getTime(),
     };
     const docRef = await db.collection(`${uid}/jornal/notes`).add(newNote);
-    console.log("Esto vale docRef ", docRef);
     dispatch(notesActiveAction(docRef.id, newNote));
   };
 };
