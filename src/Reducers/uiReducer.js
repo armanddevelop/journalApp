@@ -3,6 +3,10 @@ import { types } from "../Types/types";
 const initialState = {
   loading: false,
   msgError: null,
+  errorMsgFb: {
+    error: false,
+    msgError: "",
+  },
 };
 export const uiReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -25,6 +29,22 @@ export const uiReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
+      };
+    case types.uiErrorInFirebase:
+      return {
+        ...state,
+        errorMsgFb: {
+          error: true,
+          msgError: action.payload,
+        },
+      };
+    case types.uiRemoveErrorInFireBase:
+      return {
+        ...state,
+        errorMsgFb: {
+          error: false,
+          msgError: "",
+        },
       };
     default:
       return state;

@@ -1,6 +1,11 @@
 import { types } from "../Types/types";
 import { firebase, googleAuthProvider } from "../FireBase/fireBaseConfig";
-import { finishLoading, startLoading } from "./ui";
+import {
+  finishLoading,
+  startLoading,
+  errorInFirebase,
+  removeErrorInFirebase,
+} from "./ui";
 
 export const logInAction = (uid, displayName) => ({
   type: types.login,
@@ -36,6 +41,7 @@ export const getGoogleLogInAction = () => {
 export const getLoginUserAction = (email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
+    dispatch(removeErrorInFirebase());
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
@@ -45,8 +51,8 @@ export const getLoginUserAction = (email, password) => {
         dispatch(finishLoading());
       })
       .catch((error) => {
-        console.log("Error happed in getLoginUserAction ", error);
         dispatch(finishLoading());
+        dispatch(errorInFirebase(error.message));
       });
   };
 };
@@ -54,6 +60,7 @@ export const getLoginUserAction = (email, password) => {
 export const registerUserAction = (name, email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
+    dispatch(removeErrorInFirebase());
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -64,8 +71,8 @@ export const registerUserAction = (name, email, password) => {
         dispatch(finishLoading());
       })
       .catch((error) => {
-        console.log("error ocurred in resgisterUser ", error);
         dispatch(finishLoading());
+        dispatch(errorInFirebase(error.message));
       });
   };
 };

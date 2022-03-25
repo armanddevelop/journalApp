@@ -5,4 +5,6 @@ export const types = {
   uiRemoveError: "[UI] removeError",
   uiStartLoading: "[UI] Start loading",
   uiFinishLoading: "[UI] Finish loading",
+  uiErrorInFirebase: "[UI] Error logIn",
+  uiRemoveErrorInFireBase: "[UI] Remove Error logIn",
 };

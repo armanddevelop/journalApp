@@ -16,3 +16,12 @@ export const startLoading = () => ({
 export const finishLoading = () => ({
   type: types.uiFinishLoading,
 });
+
+export const errorInFirebase = (error) => ({
+  type: types.uiErrorInFirebase,
+  payload: error,
+});
+
+export const removeErrorInFirebase = () => ({
+  type: types.uiRemoveErrorInFireBase,
+});

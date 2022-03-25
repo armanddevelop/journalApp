@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { getLoginUserAction, registerUserAction } from "../../Actions/auth";
 import { isFormValidRegister, isFormValidLogin } from "../Utils/validations";
+import { AlertUI } from "../AlertUI";
+import { removeErrorInFirebase } from "../../Actions/ui";
 
 export const Form = ({ pageName, page, values, handleInputChange }) => {
   const dispatch = useDispatch();
   const { msgError, loading } = useSelector((state) => state.ui);
   const handleSubmit = (e) => {
     e.preventDefault();
+    dispatch(removeErrorInFirebase());
     const { email, password, name } = values;
     if (pageName === "Login" && isFormValidLogin(values, dispatch))
       return dispatch(getLoginUserAction(email, password));
@@ -17,7 +20,7 @@ export const Form = ({ pageName, page, values, handleInputChange }) => {
   };
   return (
     <form onSubmit={handleSubmit}>
-      {msgError && <div className="auth__alert-error">{msgError}</div>}
+      {msgError && <AlertUI msgError={msgError} />}
       <Inputs
         page={page}
         values={values}
