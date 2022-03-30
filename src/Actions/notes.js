@@ -33,3 +33,33 @@ export const starLoadingNotesAction = (uid) => {
     dispatch(loadNotesAction(notes));
   };
 };
+
+export const refreshNoteChange = (id) => {
+  return (dispatch, getState) => {
+    const { active, notes } = getState().notes;
+    const { title, body } = active;
+    const newNotes = notes.map((note) => {
+      if (note.idNote === id) {
+        note.title = title;
+        note.body = body;
+      }
+      return note;
+    });
+    dispatch(loadNotesAction(newNotes));
+  };
+};
+
+export const startSaveNoteAction = (note) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    if (!note.url) delete note.url;
+    const noteToFirestore = { ...note };
+    delete noteToFirestore.id;
+    try {
+      await db.doc(`${uid}/jornal/notes/${note.id}`).update(noteToFirestore);
+      dispatch(refreshNoteChange(note.id));
+    } catch (error) {
+      console.log("shit happend in startSaveNoteAction", error);
+    }
+  };
+};

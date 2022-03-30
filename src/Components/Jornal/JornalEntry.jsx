@@ -1,8 +1,17 @@
 import moment from "moment";
-export const JornalEntry = ({ title, body, date, url }) => {
+import PropTypes from "prop-types";
+import { useDispatch } from "react-redux";
+import { notesActiveAction } from "../../Actions/notes";
+
+export const JornalEntry = ({ title, body, date, url, idNote }) => {
   const noteDate = moment(date);
+  const dispatch = useDispatch();
+  const handleEntryClick = () => {
+    const noteObj = { title, body, date, url };
+    dispatch(notesActiveAction(idNote, noteObj));
+  };
   return (
-    <div className="jornal__entry pointer">
+    <div className="jornal__entry pointer" onClick={handleEntryClick}>
       {url && (
         <div
           className="jornal__entry-picture"
@@ -22,4 +31,12 @@ export const JornalEntry = ({ title, body, date, url }) => {
       </div>
     </div>
   );
+};
+
+JornalEntry.propTypes = {
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
+  date: PropTypes.number.isRequired,
+  idNote: PropTypes.string.isRequired,
+  url: PropTypes.string,
 };
