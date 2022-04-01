@@ -1,19 +1,21 @@
-import { Box, Modal, Typography, Fade } from "@mui/material";
+import { Box, Modal, Fade, Alert, AlertTitle } from "@mui/material";
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { notesCloseModalAction } from "../Actions/notes";
 
 export const ModalMsg = () => {
   const { saveNote } = useSelector((state) => state.notes);
+  const { isSave, message, title } = saveNote;
   const dispatch = useDispatch();
   const handleCloseModal = () => {
-    dispatch(notesCloseModalAction());
     setOpenModal(false);
+    dispatch(notesCloseModalAction());
   };
   const [openModal, setOpenModal] = useState(false);
   useEffect(() => {
-    if (saveNote) setOpenModal(true);
-  }, [saveNote]);
+    if (isSave && message !== "Error to save note") setOpenModal(true);
+    else if (!isSave && message === "Error to save note") setOpenModal(true);
+  }, [isSave, message]);
   return (
     <div>
       <Modal
@@ -24,13 +26,12 @@ export const ModalMsg = () => {
       >
         <Fade in={openModal}>
           <Box className="notes__modal">
-            <Typography
-              className="notes__modal-modal-title"
-              variant="h6"
-              component="h2"
-            >
-              Note Saved :)
-            </Typography>
+            <Alert severity={isSave ? "success" : "error"} variant="outlined">
+              <AlertTitle severity={isSave ? "success" : "error"}>
+                <strong>{title}</strong>
+              </AlertTitle>
+              {message}
+            </Alert>
           </Box>
         </Fade>
       </Modal>

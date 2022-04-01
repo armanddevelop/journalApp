@@ -10,8 +10,12 @@ export const notesActiveAction = (id, note) => ({
   },
 });
 
-export const notesOpenModalAction = () => ({
+export const notesOpenModalAction = (strMsg, strTitle) => ({
   type: types.notesOpenModal,
+  payload: {
+    strMsg,
+    strTitle,
+  },
 });
 
 export const notesCloseModalAction = () => ({
@@ -67,9 +71,11 @@ export const startSaveNoteAction = (note) => {
     try {
       await db.doc(`${uid}/jornal/notes/${note.id}`).update(noteToFirestore);
       dispatch(refreshNoteChange(note.id));
-      dispatch(notesOpenModalAction());
+      dispatch(notesOpenModalAction("saved", note.title));
     } catch (error) {
       console.log("shit happend in startSaveNoteAction", error);
+      const message = "Error to save note";
+      dispatch(notesOpenModalAction(message, note.title));
     }
   };
 };

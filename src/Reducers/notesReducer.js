@@ -14,7 +14,11 @@ import { types } from "../Types/types";
 }
 */
 
-const initialState = { notes: [], active: null, saveNote: false };
+const initialState = {
+  notes: [],
+  active: null,
+  saveNote: { isSave: false, title: "", message: "" },
+};
 export const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.notesActive:
@@ -28,14 +32,32 @@ export const notesReducer = (state = initialState, action) => {
         notes: [...action.payload],
       };
     case types.notesOpenModal:
+      if (action.payload.strMsg !== "Error to save note") {
+        return {
+          ...state,
+          saveNote: {
+            isSave: true,
+            message: action.payload.strMsg,
+            title: action.payload.strTitle,
+          },
+        };
+      }
       return {
         ...state,
-        saveNote: true,
+        saveNote: {
+          isSave: false,
+          message: action.payload.strMsg,
+          title: action.payload.strTitle,
+        },
       };
     case types.notesCloseModal:
       return {
         ...state,
-        saveNote: false,
+        saveNote: {
+          isSave: false,
+          message: "",
+          title: "",
+        },
       };
     default:
       return state;
