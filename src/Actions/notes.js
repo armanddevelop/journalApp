@@ -1,12 +1,21 @@
 import { db } from "../FireBase/fireBaseConfig";
 import { types } from "../Types/types";
 import { loadNotes } from "../Helpers/loadNotes";
+
 export const notesActiveAction = (id, note) => ({
   type: types.notesActive,
   payload: {
     id,
     ...note,
   },
+});
+
+export const notesOpenModalAction = () => ({
+  type: types.notesOpenModal,
+});
+
+export const notesCloseModalAction = () => ({
+  type: types.notesCloseModal,
 });
 
 export const startNewNoteAction = () => {
@@ -58,6 +67,7 @@ export const startSaveNoteAction = (note) => {
     try {
       await db.doc(`${uid}/jornal/notes/${note.id}`).update(noteToFirestore);
       dispatch(refreshNoteChange(note.id));
+      dispatch(notesOpenModalAction());
     } catch (error) {
       console.log("shit happend in startSaveNoteAction", error);
     }

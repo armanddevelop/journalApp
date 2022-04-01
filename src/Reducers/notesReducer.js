@@ -14,7 +14,7 @@ import { types } from "../Types/types";
 }
 */
 
-const initialState = { notes: [], active: null };
+const initialState = { notes: [], active: null, saveNote: false };
 export const notesReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.notesActive:
@@ -23,10 +23,19 @@ export const notesReducer = (state = initialState, action) => {
         active: { ...action.payload },
       };
     case types.notesLoad:
-      //console.log("esto vale action.payload ", action.payload);
       return {
         ...state,
         notes: [...action.payload],
+      };
+    case types.notesOpenModal:
+      return {
+        ...state,
+        saveNote: true,
+      };
+    case types.notesCloseModal:
+      return {
+        ...state,
+        saveNote: false,
       };
     default:
       return state;

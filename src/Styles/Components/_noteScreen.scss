@@ -41,3 +41,18 @@
   box-shadow: 5px 5px $dark-grey;
   height: 150px;
 }
+.notes__modal{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 50px;
+  background-color: white;
+  border: 2px solid #000;
+}
+.notes__modal-modal-title{
+  display: flex;
+  justify-content: center;
+  margin-top: 10px !important;
+}

@@ -2,6 +2,7 @@ import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { notesActiveAction } from "../../Actions/notes";
 import { useForm } from "../../Hooks/useForm";
+import { ModalMsg } from "../ModalMsg";
 import { NotesAppBar } from "./NotesAppBar";
 
 export const NoteScreen = () => {
@@ -29,7 +30,7 @@ export const NoteScreen = () => {
   return (
     <div className="notes__main-content">
       <NotesAppBar />
-
+      <ModalMsg />
       <div className="notes__content">
         <input
           type="text"

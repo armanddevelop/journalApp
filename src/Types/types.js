@@ -13,6 +13,8 @@ export const types = {
   notesActive: "[Notes] Set active note",
   notesLoad: "[Notes] Load notes",
   notesUpdate: "[Notes] Update note",
+  notesOpenModal: "[Notes] Open modal note",
+  notesCloseModal: "[Notes] Close modal note",
   notesFileUrl: "[Notes] Updated file url",
   notesDelete: "[Notes] Delete note",
   notesLogOutCleaning: "[Notes] LogOut cleaning",
