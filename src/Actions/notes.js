@@ -1,6 +1,7 @@
 import { db } from "../FireBase/fireBaseConfig";
 import { types } from "../Types/types";
 import { loadNotes } from "../Helpers/loadNotes";
+import { fileUpload } from "../Helpers/fileUpload";
 
 export const notesActiveAction = (id, note) => ({
   type: types.notesActive,
@@ -76,6 +77,22 @@ export const startSaveNoteAction = (note) => {
       console.log("shit happend in startSaveNoteAction", error);
       const message = "Error to save note";
       dispatch(notesOpenModalAction(message, note.title));
+    }
+  };
+};
+
+export const startUploadImageAction = (image) => {
+  return async (dispatch, getState) => {
+    const { active: activeNote } = getState().notes;
+    try {
+      const urlImage = await fileUpload(image);
+      const activeNoteUrl = {
+        ...activeNote,
+        url: urlImage,
+      };
+      dispatch(startSaveNoteAction(activeNoteUrl));
+    } catch (error) {
+      console.log("shit happend in startUploadImageAction ", error);
     }
   };
 };
