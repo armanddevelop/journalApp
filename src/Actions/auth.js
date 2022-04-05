@@ -6,6 +6,7 @@ import {
   errorInFirebase,
   removeErrorInFirebase,
 } from "./ui";
+import { notesLogOutAction } from "./notes";
 
 export const logInAction = (uid, displayName) => ({
   type: types.login,
@@ -21,8 +22,13 @@ export const logOutAction = () => ({
 
 export const startLogOut = () => {
   return async (dispatch) => {
-    await firebase.auth().signOut();
-    dispatch(logOutAction());
+    try {
+      await firebase.auth().signOut();
+      dispatch(logOutAction());
+      dispatch(notesLogOutAction());
+    } catch (error) {
+      console.log("shit happen in startLogOut ", error);
+    }
   };
 };
 

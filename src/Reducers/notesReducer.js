@@ -21,6 +21,11 @@ const initialState = {
 };
 export const notesReducer = (state = initialState, action) => {
   switch (action.type) {
+    case types.notesAddNew:
+      return {
+        ...state,
+        notes: [action.payload, ...state.notes],
+      };
     case types.notesActive:
       return {
         ...state,
@@ -31,6 +36,8 @@ export const notesReducer = (state = initialState, action) => {
         ...state,
         notes: [...action.payload],
       };
+    case types.notesUpdate:
+      return {};
     case types.notesOpenModal:
       if (action.payload.strMsg !== "Error to save note") {
         return {
@@ -59,6 +66,15 @@ export const notesReducer = (state = initialState, action) => {
           title: "",
         },
       };
+    case types.notesDelete:
+      const { notes } = state;
+      return {
+        ...state,
+        notes: notes.filter((note) => note.id !== action.payload),
+        active: null,
+      };
+    case types.notesLogOutCleaning:
+      return initialState;
     default:
       return state;
   }

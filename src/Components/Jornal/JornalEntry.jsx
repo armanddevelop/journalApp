@@ -3,12 +3,12 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { notesActiveAction } from "../../Actions/notes";
 
-export const JornalEntry = ({ title, body, date, url, idNote }) => {
+export const JornalEntry = ({ title, body, date, url, id }) => {
   const noteDate = moment(date);
   const dispatch = useDispatch();
   const handleEntryClick = () => {
     const noteObj = { title, body, date, url };
-    dispatch(notesActiveAction(idNote, noteObj));
+    dispatch(notesActiveAction(id, noteObj));
   };
   return (
     <div className="jornal__entry pointer" onClick={handleEntryClick}>
@@ -37,6 +37,6 @@ JornalEntry.propTypes = {
   title: PropTypes.string.isRequired,
   body: PropTypes.string.isRequired,
   date: PropTypes.number.isRequired,
-  idNote: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   url: PropTypes.string,
 };

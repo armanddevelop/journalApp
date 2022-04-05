@@ -24,6 +24,24 @@ export const notesCloseModalAction = () => ({
   type: types.notesCloseModal,
 });
 
+export const loadNotesAction = (notes) => ({
+  type: types.notesLoad,
+  payload: notes,
+});
+
+export const deleteNoteAction = (id) => ({
+  type: types.notesDelete,
+  payload: id,
+});
+
+export const addNewNote = (id, note) => ({
+  type: types.notesAddNew,
+  payload: {
+    id,
+    ...note,
+  },
+});
+
 export const startNewNoteAction = () => {
   return async (dispatch, getState) => {
     const { uid } = getState().auth;
@@ -32,14 +50,19 @@ export const startNewNoteAction = () => {
       body: "",
       date: new Date().getTime(),
     };
-    const docRef = await db.collection(`${uid}/jornal/notes`).add(newNote);
-    dispatch(notesActiveAction(docRef.id, newNote));
+    try {
+      const docRef = await db.collection(`${uid}/jornal/notes`).add(newNote);
+      dispatch(notesActiveAction(docRef.id, newNote));
+      //dispatch(starLoadingNotesAction(uid));
+      dispatch(addNewNote(docRef.id, newNote));
+    } catch (error) {
+      console.log("shit happens in  startNewNoteAction ", error);
+    }
   };
 };
 
-export const loadNotesAction = (notes) => ({
-  type: types.notesLoad,
-  payload: notes,
+export const notesLogOutAction = () => ({
+  type: types.notesLogOutCleaning,
 });
 
 export const starLoadingNotesAction = (uid) => {
@@ -58,10 +81,10 @@ export const refreshNoteChange = (noteUpdate) => {
     const { active, notes } = getState().notes;
     const { title, body } = active;
     const newNotes = notes.map((note) => {
-      if (note.idNote === noteUpdate.id) {
+      if (note.id === noteUpdate.id) {
         note.title = title;
         note.body = body;
-        note.url = noteUpdate.url;
+        note.url = noteUpdate.url ? noteUpdate.url : note.url;
       }
       return note;
     });
@@ -104,6 +127,18 @@ export const startUploadImageAction = (image) => {
     } catch (error) {
       dispatch(finishLoading());
       console.log("shit happend in startUploadImageAction ", error);
+    }
+  };
+};
+
+export const startDeleteNoteAction = (idToDelete) => {
+  return async (dispatch, getState) => {
+    const { uid } = getState().auth;
+    try {
+      await db.doc(`${uid}/jornal/notes/${idToDelete}`).delete();
+      dispatch(deleteNoteAction(idToDelete));
+    } catch (error) {
+      console.log("Shit happend in startDeleteNoteAction ", error);
     }
   };
 };

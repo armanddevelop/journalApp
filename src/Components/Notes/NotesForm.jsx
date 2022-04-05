@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { notesActiveAction } from "../../Actions/notes";
+import { notesActiveAction, startDeleteNoteAction } from "../../Actions/notes";
 import { useForm } from "../../Hooks/useForm";
 
 export const NotesForm = () => {
@@ -9,12 +9,14 @@ export const NotesForm = () => {
   const { values, handleInputChange, reset } = useForm(note);
   const { title, body } = values;
   const idActive = useRef(note.id);
+
   useEffect(() => {
     if (idActive.current !== note.id) {
       reset(note);
       idActive.current = note.id;
     }
   }, [note, reset]);
+
   useEffect(() => {
     const { id, date, title, body, url } = values;
     const noteObj = {
@@ -25,6 +27,11 @@ export const NotesForm = () => {
     };
     dispatch(notesActiveAction(id, noteObj));
   }, [values, dispatch]);
+
+  const handleDelete = () => {
+    dispatch(startDeleteNoteAction(idActive.current));
+  };
+
   return (
     <div className="notes__content">
       <input
@@ -44,6 +51,9 @@ export const NotesForm = () => {
         value={body}
         onChange={(e) => handleInputChange(e)}
       ></textarea>
+      <button className="btn btn-danger" onClick={handleDelete}>
+        Delete note
+      </button>
       {note.url && (
         <div className="notes__image">
           <img src={note.url} alt="source" />
