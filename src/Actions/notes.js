@@ -2,6 +2,7 @@ import { db } from "../FireBase/fireBaseConfig";
 import { types } from "../Types/types";
 import { loadNotes } from "../Helpers/loadNotes";
 import { fileUpload } from "../Helpers/fileUpload";
+import { finishLoading, startLoading } from "./ui";
 
 export const notesActiveAction = (id, note) => ({
   type: types.notesActive,
@@ -43,19 +44,24 @@ export const loadNotesAction = (notes) => ({
 
 export const starLoadingNotesAction = (uid) => {
   return async (dispatch) => {
-    const notes = await loadNotes(uid);
-    dispatch(loadNotesAction(notes));
+    try {
+      const notes = await loadNotes(uid);
+      dispatch(loadNotesAction(notes));
+    } catch (error) {
+      console.log("Shit happend in starLoadingNotesAction", error);
+    }
   };
 };
 
-export const refreshNoteChange = (id) => {
+export const refreshNoteChange = (noteUpdate) => {
   return (dispatch, getState) => {
     const { active, notes } = getState().notes;
     const { title, body } = active;
     const newNotes = notes.map((note) => {
-      if (note.idNote === id) {
+      if (note.idNote === noteUpdate.id) {
         note.title = title;
         note.body = body;
+        note.url = noteUpdate.url;
       }
       return note;
     });
@@ -71,11 +77,14 @@ export const startSaveNoteAction = (note) => {
     delete noteToFirestore.id;
     try {
       await db.doc(`${uid}/jornal/notes/${note.id}`).update(noteToFirestore);
-      dispatch(refreshNoteChange(note.id));
+      //dispatch(starLoadingNotesAction(uid));
+      dispatch(finishLoading());
+      dispatch(refreshNoteChange(note));
       dispatch(notesOpenModalAction("saved", note.title));
     } catch (error) {
       console.log("shit happend in startSaveNoteAction", error);
       const message = "Error to save note";
+      dispatch(finishLoading());
       dispatch(notesOpenModalAction(message, note.title));
     }
   };
@@ -83,6 +92,7 @@ export const startSaveNoteAction = (note) => {
 
 export const startUploadImageAction = (image) => {
   return async (dispatch, getState) => {
+    dispatch(startLoading());
     const { active: activeNote } = getState().notes;
     try {
       const urlImage = await fileUpload(image);
@@ -92,6 +102,7 @@ export const startUploadImageAction = (image) => {
       };
       dispatch(startSaveNoteAction(activeNoteUrl));
     } catch (error) {
+      dispatch(finishLoading());
       console.log("shit happend in startUploadImageAction ", error);
     }
   };
