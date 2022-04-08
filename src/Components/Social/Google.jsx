@@ -7,7 +7,7 @@ export const Google = () => {
     dispatch(getGoogleLogInAction());
   };
   return (
-    <div className="auth__social_networks">
+    <div className="auth__social_networks animate__animated animate__fadeIn">
       <p>Login with Social Networks</p>
       <div className="google-btn" onClick={handleGoogleSingIn}>
         <div className="google-icon-wrapper">

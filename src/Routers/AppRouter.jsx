@@ -5,7 +5,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { JornalScreen } from "../Components";
 import { AuthRouter } from "./AuthRouter";
 import { firebase } from "../FireBase/fireBaseConfig";

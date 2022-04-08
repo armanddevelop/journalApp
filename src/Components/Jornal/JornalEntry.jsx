@@ -11,7 +11,10 @@ export const JornalEntry = ({ title, body, date, url, id }) => {
     dispatch(notesActiveAction(id, noteObj));
   };
   return (
-    <div className="jornal__entry pointer" onClick={handleEntryClick}>
+    <div
+      className="jornal__entry pointer animate__animated animate__fadeIn animate__faster"
+      onClick={handleEntryClick}
+    >
       {url && (
         <div
           className="jornal__entry-picture"

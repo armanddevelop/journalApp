@@ -19,7 +19,7 @@ export const Form = ({ pageName, page, values, handleInputChange }) => {
       return dispatch(registerUserAction(name, email, password));
   };
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="animate__animated animate__fadeIn">
       {msgError && <AlertUI msgError={msgError} />}
       <Inputs
         page={page}
