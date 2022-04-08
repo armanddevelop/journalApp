@@ -9,12 +9,11 @@ export const fileUpload = async (file) => {
       method: "POST",
       body: formData,
     });
-    console.log("esto vale response ", response);
     if (response.status === 200) {
       const respCloud = await response.json();
       return respCloud.secure_url;
     } else {
-      throw await response.json();
+      return null;
     }
   } catch (error) {
     console.log("shit happend trying to upload image ", error);
