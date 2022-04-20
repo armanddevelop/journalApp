@@ -8,8 +8,11 @@ import {
   notesActiveAction,
   starLoadingNotesAction,
   startSaveNoteAction,
+  refreshNoteChange,
+  startDeleteNoteAction,
 } from "../../Actions/notes";
 import { db } from "../../FireBase/fireBaseConfig";
+import { loadNotes } from "../../Helpers/loadNotes";
 import { types } from "../../Types/types";
 
 const middlewares = [thunk];
@@ -33,7 +36,7 @@ describe("Test on notes actions", () => {
     store = mockStore(initState);
   });
 
-  it("startNewNoteAction", async () => {
+  it("startNewNoteAction should save a new note", async () => {
     await store.dispatch(startNewNoteAction());
     const actions = store.getActions();
     const notesActiveObject = {
@@ -65,7 +68,7 @@ describe("Test on notes actions", () => {
     await db.doc(`${auth.uid}/jornal/notes/${id}`).delete();
   });
 
-  it("notesActiveAction test", () => {
+  it("notesActiveAction should active a note", () => {
     const id = 123456;
     const note = {
       title: "titulo",
@@ -109,5 +112,40 @@ describe("Test on notes actions", () => {
     expect(actions[2].type).toEqual(types.notesOpenModal);
     expect(actions[2].payload.strMsg).toEqual("saved");
     expect(actions[2].payload.strTitle).toEqual(note.title);
+  });
+
+  it("refreshNoteChange should refresh notes", () => {
+    const { notes } = store.getState((state) => state);
+    const { active, notes: notesArray } = notes;
+    active.title = "alicha";
+    active.body = "nota de prueba de alicha";
+    notesArray.push({
+      id: "Cjx6qYhnGuCQ4IeoUwJX",
+      title: "prueba",
+      body: "nota de prueba",
+      url: "",
+    });
+    const newNote = {
+      id: "Cjx6qYhnGuCQ4IeoUwJX",
+    };
+    store.dispatch(refreshNoteChange(newNote));
+    const actions = store.getActions();
+
+    expect(actions[0].type).toEqual(types.notesLoad);
+    expect(actions[0].payload[0].title).toEqual(active.title);
+    expect(actions[0].payload[0].body).toEqual(active.body);
+  });
+
+  it("startDeleteNoteAction should delete a note", async () => {
+    const id = "9yS9CvkKUvtoWRbxvVZB";
+    await store.dispatch(startDeleteNoteAction(id));
+    const action = store.getActions();
+    const { auth } = store.getState((state) => state);
+    const notes = await loadNotes(auth.id);
+
+    expect(action[0].type).toEqual(types.notesDelete);
+    expect(action[0].payload).toEqual(id);
+    const noteDelete = notes.filter((note) => note.id === id);
+    expect(noteDelete.length).toEqual(0);
   });
 });
