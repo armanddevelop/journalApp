@@ -10,11 +10,21 @@ import {
   startSaveNoteAction,
   refreshNoteChange,
   startDeleteNoteAction,
+  startUploadImageAction,
 } from "../../Actions/notes";
 import { db } from "../../FireBase/fireBaseConfig";
 import { loadNotes } from "../../Helpers/loadNotes";
 import { types } from "../../Types/types";
 
+jest.mock("../../Helpers/fileUpload", () => {
+  return {
+    fileUpload: () => {
+      return Promise.resolve("Cualquierlink/any-imagen.jpg");
+    },
+  };
+});
+
+global.scrollTo = jest.fn();
 const middlewares = [thunk];
 const mockStore = configureStore(middlewares);
 const initState = {
@@ -23,8 +33,9 @@ const initState = {
   },
   notes: {
     active: {
-      title: "",
-      body: "",
+      title: "hola",
+      body: "creting",
+      id: "jfzcEBqVK8fhTdAdMCKP",
     },
     notes: [],
   },
@@ -147,5 +158,19 @@ describe("Test on notes actions", () => {
     expect(action[0].payload).toEqual(id);
     const noteDelete = notes.filter((note) => note.id === id);
     expect(noteDelete.length).toEqual(0);
+  });
+
+  it("startUploadImageAction should return a url of the image", async () => {
+    const file = "picture.jpg";
+    const { auth } = store.getState((state) => state);
+    const { notes } = initState;
+    await store.dispatch(startUploadImageAction(file));
+    const actions = store.getActions();
+    const docRef = await db
+      .doc(`/${auth.uid}/jornal/notes/${notes.active.id}`)
+      .get();
+
+    expect(docRef.data().url).toEqual("Cualquierlink/any-imagen.jpg");
+    expect(actions[0].type).toEqual(types.uiStartLoading);
   });
 });
