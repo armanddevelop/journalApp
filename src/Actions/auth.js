@@ -48,7 +48,7 @@ export const getLoginUserAction = (email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
     dispatch(removeErrorInFirebase());
-    firebase
+    return firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
       .then(({ user }) => {
@@ -67,7 +67,7 @@ export const registerUserAction = (name, email, password) => {
   return (dispatch) => {
     dispatch(startLoading());
     dispatch(removeErrorInFirebase());
-    firebase
+    return firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
       .then(async ({ user }) => {

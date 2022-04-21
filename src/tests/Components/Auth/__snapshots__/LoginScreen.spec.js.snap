@@ -1,0 +1,91 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in LoginScreen component snapShot to LoginScreen component 1`] = `
+Array [
+  <h3
+    className="auth__title"
+  >
+    Login
+  </h3>,
+  <form
+    className="animate__animated animate__fadeIn"
+    onSubmit={[Function]}
+  >
+    Array [
+      <input
+        autoComplete="off"
+        className="auth__input"
+        name="name"
+        onChange={[Function]}
+        placeholder="Name"
+        type="text"
+      />,
+      <input
+        autoComplete="off"
+        className="auth__input"
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        type="text"
+        value="alicha@test.com"
+      />,
+      <input
+        className="auth__input"
+        name="password"
+        onChange={[Function]}
+        placeholder="password"
+        type="password"
+        value="123456"
+      />,
+      <input
+        className="auth__input"
+        name="confirmPassword"
+        onChange={[Function]}
+        placeholder="Confirm password"
+        type="password"
+      />,
+    ]
+    <button
+      className="btn btn-primary btn-block mb-5"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>,
+  <div
+    className="auth__social_networks animate__animated animate__fadeIn"
+  >
+    <p>
+      Login with Social Networks
+    </p>
+    <div
+      className="google-btn"
+      onClick={[Function]}
+    >
+      <div
+        className="google-icon-wrapper"
+      >
+        <img
+          alt="google button"
+          className="google-icon"
+          src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+        />
+      </div>
+      <p
+        className="btn-text"
+      >
+        <span>
+          Sign in with google
+        </span>
+      </p>
+    </div>
+  </div>,
+  <a
+    className="link"
+    href="/auth/register"
+    onClick={[Function]}
+  >
+    Create new account
+  </a>,
+]
+`;

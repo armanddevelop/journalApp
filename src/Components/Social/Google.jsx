@@ -18,7 +18,7 @@ export const Google = () => {
           />
         </div>
         <p className="btn-text">
-          <b>Sign in with google</b>
+          <span>Sign in with google</span>
         </p>
       </div>
     </div>
