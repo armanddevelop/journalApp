@@ -1,5 +1,139 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Test in LoginScreen component Should show AlertUI component 1`] = `
+Array [
+  <h3
+    className="auth__title"
+  >
+    Login
+  </h3>,
+  <div
+    className="alerts__container"
+  >
+    Array [
+      "",
+      Array [
+        "",
+        <div
+          className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardError MuiAlert-standard css-xilmwd-MuiPaper-root-MuiAlert-root"
+          role="alert"
+        >
+          Array [
+            "",
+            <div
+              className="MuiAlert-icon css-1ytlwq5-MuiAlert-icon"
+            >
+              Array [
+                "",
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+                  data-testid="ErrorOutlineIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>,
+              ]
+            </div>,
+          ]
+          Array [
+            "",
+            <div
+              className="MuiAlert-message css-acap47-MuiAlert-message"
+            >
+              Shit happend in test
+            </div>,
+          ]
+        </div>,
+      ],
+    ]
+  </div>,
+  <form
+    className="animate__animated animate__fadeIn"
+    onSubmit={[Function]}
+  >
+    Array [
+      <input
+        autoComplete="off"
+        className="auth__input"
+        name="name"
+        onChange={[Function]}
+        placeholder="Name"
+        type="text"
+      />,
+      <input
+        autoComplete="off"
+        className="auth__input"
+        name="email"
+        onChange={[Function]}
+        placeholder="Email"
+        type="text"
+        value="alicha@test.com"
+      />,
+      <input
+        className="auth__input"
+        name="password"
+        onChange={[Function]}
+        placeholder="password"
+        type="password"
+        value="123456"
+      />,
+      <input
+        className="auth__input"
+        name="confirmPassword"
+        onChange={[Function]}
+        placeholder="Confirm password"
+        type="password"
+      />,
+    ]
+    <button
+      className="btn btn-primary btn-block mb-5"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>,
+  <div
+    className="auth__social_networks animate__animated animate__fadeIn"
+  >
+    <p>
+      Login with Social Networks
+    </p>
+    <div
+      className="google-btn"
+      onClick={[Function]}
+    >
+      <div
+        className="google-icon-wrapper"
+      >
+        <img
+          alt="google button"
+          className="google-icon"
+          src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+        />
+      </div>
+      <p
+        className="btn-text"
+      >
+        <span>
+          Sign in with google
+        </span>
+      </p>
+    </div>
+  </div>,
+  <a
+    className="link"
+    href="/auth/register"
+    onClick={[Function]}
+  >
+    Create new account
+  </a>,
+]
+`;
+
 exports[`Test in LoginScreen component snapShot to LoginScreen component 1`] = `
 Array [
   <h3

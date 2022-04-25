@@ -3,23 +3,17 @@ import { Provider } from "react-redux";
 import { MemoryRouter } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { getGoogleLogInAction } from "../../../Actions/auth";
+import { RegisterScreen } from "../../../Components/Auth/RegisterScreen";
 import { removeErrorInFirebase, unSetErrorAction } from "../../../Actions/ui";
-import { LoginScreen } from "../../../Components/Auth/LoginScreen";
 
 const mockLocation = jest.fn();
-
 jest.mock("react-router-dom", () => ({
   ...jest.requireActual("react-router-dom"),
   useLocation: () => mockLocation,
 }));
 
 jest.mock("../../../Components/Utils/identifierPage", () => ({
-  identifierPage: () => "page name",
-}));
-
-jest.mock("../../../Actions/auth", () => ({
-  getGoogleLogInAction: jest.fn(),
+  identifierPage: () => "Register",
 }));
 
 jest.mock("../../../Actions/ui", () => ({
@@ -43,37 +37,32 @@ store.dispatch = jest.fn();
 const wrapper = mount(
   <Provider store={store}>
     <MemoryRouter>
-      <LoginScreen />
+      <RegisterScreen />
     </MemoryRouter>
   </Provider>
 );
-describe("Test in LoginScreen component", () => {
+
+describe("Test in RegisterScreen component", () => {
   beforeEach(() => {
     store = mockStore(initState);
     jest.clearAllMocks();
   });
 
-  it("snapShot to LoginScreen component", () => {
+  it("Should mount rigth the component", () => {
     expect(wrapper).toMatchSnapshot();
+  });
+
+  it("Should fireAction in  already register button", () => {
+    wrapper.find(".link").first().prop("onClick")();
+
+    expect(removeErrorInFirebase).toHaveBeenCalled();
+    expect(unSetErrorAction).toHaveBeenCalled();
   });
 
   it("Should show register title", () => {
     const title = wrapper.find(".auth__title").text();
 
-    expect(title).toEqual("Login");
-  });
-
-  it("Login with google should fire the google login", () => {
-    wrapper.find(".google-btn").prop("onClick")();
-
-    expect(getGoogleLogInAction).toHaveBeenCalled();
-  });
-
-  it("removeErrorInFirebase and unSetErrorAction should been called", () => {
-    wrapper.find(".link").first().prop("onClick")();
-
-    expect(removeErrorInFirebase).toHaveBeenCalled();
-    expect(unSetErrorAction).toHaveBeenCalled();
+    expect(title).toEqual("Register");
   });
 
   it("Should show AlertUI component", () => {
@@ -82,15 +71,16 @@ describe("Test in LoginScreen component", () => {
       ui: {
         errorMsgFb: {
           error: true,
-          msgError: "Shit happend in test",
+          msgError: "Shit happend in Register Screen",
         },
       },
     };
     let store = mockStore(initState);
+
     const wrapper = mount(
       <Provider store={store}>
         <MemoryRouter>
-          <LoginScreen />
+          <RegisterScreen />
         </MemoryRouter>
       </Provider>
     );
