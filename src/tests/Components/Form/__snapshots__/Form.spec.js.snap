@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in Form component login form SnapShot to Form component 1`] = `
+<form
+  className="animate__animated animate__fadeIn"
+  onSubmit={[Function]}
+>
+  Array [
+    <input
+      autoComplete="off"
+      className="auth__input"
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      type="text"
+      value="test@hotmail.com"
+    />,
+    <input
+      className="auth__input"
+      name="password"
+      onChange={[Function]}
+      placeholder="password"
+      type="password"
+      value="als811"
+    />,
+  ]
+  <button
+    className="btn btn-primary btn-block mb-5"
+    disabled={false}
+    type="submit"
+  >
+    Login
+  </button>
+</form>
+`;
+
+exports[`Test in Form component login form Test in Form component register form To match Snapshot register 1`] = `
+<form
+  className="animate__animated animate__fadeIn"
+  onSubmit={[Function]}
+>
+  Array [
+    <input
+      autoComplete="off"
+      className="auth__input"
+      name="name"
+      onChange={[Function]}
+      placeholder="Name"
+      type="text"
+      value="alicha"
+    />,
+    <input
+      autoComplete="off"
+      className="auth__input"
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      type="text"
+      value="test@hotmail.com"
+    />,
+    <input
+      className="auth__input"
+      name="password"
+      onChange={[Function]}
+      placeholder="password"
+      type="password"
+      value="als811"
+    />,
+    <input
+      className="auth__input"
+      name="confirmPassword"
+      onChange={[Function]}
+      placeholder="Confirm password"
+      type="password"
+    />,
+  ]
+  <button
+    className="btn btn-primary btn-block mb-5"
+    disabled={false}
+    type="submit"
+  >
+    Register
+  </button>
+</form>
+`;
