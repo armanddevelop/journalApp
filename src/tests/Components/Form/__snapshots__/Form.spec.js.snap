@@ -34,6 +34,100 @@ exports[`Test in Form component login form SnapShot to Form component 1`] = `
 </form>
 `;
 
+exports[`Test in Form component login form Snapshot with the AlertUI component Should show AlertUI componentn in snapshot 1`] = `
+<form
+  className="animate__animated animate__fadeIn"
+  onSubmit={[Function]}
+>
+  <div
+    className="alerts__container"
+  >
+    Array [
+      "",
+      Array [
+        "",
+        <div
+          className="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation0 MuiAlert-root MuiAlert-standardError MuiAlert-standard css-xilmwd-MuiPaper-root-MuiAlert-root"
+          role="alert"
+        >
+          Array [
+            "",
+            <div
+              className="MuiAlert-icon css-1ytlwq5-MuiAlert-icon"
+            >
+              Array [
+                "",
+                <svg
+                  aria-hidden={true}
+                  className="MuiSvgIcon-root MuiSvgIcon-fontSizeInherit css-1vooibu-MuiSvgIcon-root"
+                  data-testid="ErrorOutlineIcon"
+                  focusable="false"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"
+                  />
+                </svg>,
+              ]
+            </div>,
+          ]
+          Array [
+            "",
+            <div
+              className="MuiAlert-message css-acap47-MuiAlert-message"
+            >
+              shit happend in Form
+            </div>,
+          ]
+        </div>,
+      ],
+    ]
+  </div>
+  Array [
+    <input
+      autoComplete="off"
+      className="auth__input"
+      name="name"
+      onChange={[Function]}
+      placeholder="Name"
+      type="text"
+      value="alicha"
+    />,
+    <input
+      autoComplete="off"
+      className="auth__input"
+      name="email"
+      onChange={[Function]}
+      placeholder="Email"
+      type="text"
+      value="test@hotmail.com"
+    />,
+    <input
+      className="auth__input"
+      name="password"
+      onChange={[Function]}
+      placeholder="password"
+      type="password"
+      value="als811"
+    />,
+    <input
+      className="auth__input"
+      name="confirmPassword"
+      onChange={[Function]}
+      placeholder="Confirm password"
+      type="password"
+    />,
+  ]
+  <button
+    className="btn btn-primary btn-block mb-5"
+    disabled={true}
+    type="submit"
+  >
+    Register
+  </button>
+</form>
+`;
+
 exports[`Test in Form component login form Test in Form component register form To match Snapshot register 1`] = `
 <form
   className="animate__animated animate__fadeIn"

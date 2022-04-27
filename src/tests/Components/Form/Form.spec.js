@@ -98,4 +98,40 @@ describe("Test in Form component login form", () => {
       );
     });
   });
+  describe("Snapshot with the AlertUI component", () => {
+    const initState = {
+      auth: {},
+      ui: {
+        msgError: "shit happend in Form",
+        loading: true,
+      },
+    };
+    let store = mockStore(initState);
+    const wrapper = mount(
+      <Provider store={store}>
+        <Form
+          pageName="Register"
+          page="register"
+          values={values}
+          handleInputChange={() => {}}
+        />
+      </Provider>
+    );
+
+    it("Should show AlertUI componentn in snapshot", () => {
+      expect(wrapper).toMatchSnapshot();
+    });
+
+    it("Should have alerts__container in AlertUI component", () => {
+      const propertie = wrapper.find(".alerts__container").exists();
+
+      expect(propertie).toEqual(true);
+    });
+
+    it("Should have the error message in AlertUI component", () => {
+      const msgError = wrapper.find(".MuiAlert-message").first().text();
+
+      expect(msgError).toEqual(initState.ui.msgError);
+    });
+  });
 });

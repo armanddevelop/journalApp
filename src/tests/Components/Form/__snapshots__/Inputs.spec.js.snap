@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in Inputs component SnapShot with the register field form 1`] = `
+Array [
+  <input
+    autoComplete="off"
+    className="auth__input"
+    name="name"
+    onChange={[Function]}
+    placeholder="Name"
+    type="text"
+    value="alicha"
+  />,
+  <input
+    autoComplete="off"
+    className="auth__input"
+    name="email"
+    onChange={[Function]}
+    placeholder="Email"
+    type="text"
+    value="prueba@test.com"
+  />,
+  <input
+    className="auth__input"
+    name="password"
+    onChange={[Function]}
+    placeholder="password"
+    type="password"
+    value="123466"
+  />,
+  <input
+    className="auth__input"
+    name="confirmPassword"
+    onChange={[Function]}
+    placeholder="Confirm password"
+    type="password"
+    value="123466"
+  />,
+]
+`;
+
+exports[`Test in Inputs component Snapshot in Inputs component 1`] = `
+Array [
+  <input
+    autoComplete="off"
+    className="auth__input"
+    name="email"
+    onChange={[Function]}
+    placeholder="Email"
+    type="text"
+    value="prueba@test.com"
+  />,
+  <input
+    className="auth__input"
+    name="password"
+    onChange={[Function]}
+    placeholder="password"
+    type="password"
+    value="123466"
+  />,
+]
+`;
