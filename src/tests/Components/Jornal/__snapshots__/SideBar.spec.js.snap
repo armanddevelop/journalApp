@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in SideBar component SnapShot to SideBar component 1`] = `
+<aside
+  className="jornal__sidebar"
+>
+  <div
+    className="jornal__sidebar-navbar"
+  >
+    <h3
+      className="mt-5"
+    >
+      <i
+        className="far fa-moon"
+      />
+      <span>
+         
+        Alicha
+      </span>
+    </h3>
+    <button
+      className="btn"
+      onClick={[Function]}
+    >
+      LogOut
+    </button>
+  </div>
+  <div
+    className="jornal__new-entry"
+    onClick={[Function]}
+  >
+    <i
+      className="far fa-calendar-plus fa-5x jornal__new-entry-icon"
+    />
+    <p
+      className="mt-5"
+    >
+      New Entry
+    </p>
+  </div>
+  <div
+    className="jornal__entries"
+  />
+</aside>
+`;
