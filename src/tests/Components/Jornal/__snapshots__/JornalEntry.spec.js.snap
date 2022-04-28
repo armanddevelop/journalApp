@@ -1,0 +1,74 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test in JornalEntry compoent SnapShot to JornalEntry component with url prop 1`] = `
+<div
+  className="jornal__entry pointer animate__animated animate__fadeIn animate__faster"
+  onClick={[Function]}
+>
+  <div
+    className="jornal__entry-picture"
+    style={
+      Object {
+        "backgroundImage": "url(http://www.thisisUrl.com)",
+        "backgroundSize": "cover",
+      }
+    }
+  />
+  <div
+    className="jornal__entry-body"
+  >
+    <p
+      className="jornal__entry-title"
+    >
+      Component
+    </p>
+    <p
+      className="jornal__entry-content"
+    >
+      This is the body
+    </p>
+  </div>
+  <div
+    className="jornal__entry-date-box"
+  >
+    <span>
+      Tuesday
+    </span>
+    <h4>
+      5th
+    </h4>
+  </div>
+</div>
+`;
+
+exports[`Test in JornalEntry compoent SnapShot to JornalEntry component without url prop 1`] = `
+<div
+  className="jornal__entry pointer animate__animated animate__fadeIn animate__faster"
+  onClick={[Function]}
+>
+  <div
+    className="jornal__entry-body"
+  >
+    <p
+      className="jornal__entry-title"
+    >
+      Component
+    </p>
+    <p
+      className="jornal__entry-content"
+    >
+      This is the body
+    </p>
+  </div>
+  <div
+    className="jornal__entry-date-box"
+  >
+    <span>
+      Tuesday
+    </span>
+    <h4>
+      5th
+    </h4>
+  </div>
+</div>
+`;
